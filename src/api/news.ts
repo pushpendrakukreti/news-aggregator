@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
-const NEWS_API_URL = `${BASE_URL}/api/news`;
-const GUARDIAN_API_URL = `${BASE_URL}/api/guardian`;
-const NYTIMES_API_URL = `${BASE_URL}/api/nyt`;
+const NEWS_API_URL = "/api/news";
+const GUARDIAN_API_URL = "/api/guardian";
+const NYTIMES_API_URL = "/api/nyt";
 
 const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const GUARDIAN_API_KEY = import.meta.env.VITE_GUARDIAN_API_KEY;
@@ -31,9 +30,9 @@ export const fetchNews = async (
     if (filters?.date) params["from"] = filters.date;
 
     const [newsApiRes, guardianRes, nytRes] = await Promise.all([
-      axios.get(`${NEWS_API_URL}?q=${searchQuery}&sortBy=popularity&apiKey=${NEWS_API_KEY}&pageSize=100`),
-      axios.get(`${GUARDIAN_API_URL}?q=${searchQuery}&api-key=${GUARDIAN_API_KEY}`),
-      axios.get(`${NYTIMES_API_URL}?q=${searchQuery}&api-key=${NYTIMES_API_KEY}`),
+      axios.get(NEWS_API_URL, { params }),
+      axios.get(GUARDIAN_API_URL, { params: { q: searchQuery, "api-key": GUARDIAN_API_KEY } }),
+      axios.get(NYTIMES_API_URL, { params: { q: searchQuery, "api-key": NYTIMES_API_KEY } }),
     ]);
 
     let categoriesSet = new Set<string>();

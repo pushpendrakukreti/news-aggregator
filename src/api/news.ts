@@ -30,13 +30,19 @@ export const fetchNews = async (
     if (filters?.date) params["from"] = filters.date;
 
     const [newsApiRes, guardianRes, nytRes] = await Promise.all([
-      axios.get(NEWS_API_URL, { params }),
+      axios.get(NEWS_API_URL, {
+        params,
+        headers: { "User-Agent": "Mozilla/5.0", "Accept": "application/json" },
+      }),
       axios.get(
         `https://api.allorigins.win/raw?url=${encodeURIComponent(
           GUARDIAN_API_URL + `?q=${searchQuery}&api-key=${GUARDIAN_API_KEY}`
         )}`
       ),
-      axios.get(NYTIMES_API_URL, { params: { q: searchQuery, "api-key": NYTIMES_API_KEY } }),
+      axios.get(NYTIMES_API_URL, {
+        params: { q: searchQuery, "api-key": NYTIMES_API_KEY },
+        headers: { "User-Agent": "Mozilla/5.0", "Accept": "application/json" },
+      }),
     ]);
 
     let categoriesSet = new Set<string>();

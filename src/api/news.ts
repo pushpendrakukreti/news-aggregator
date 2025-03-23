@@ -28,13 +28,18 @@ export const fetchNews = async (
     console.log(`Fetching news for query: ${searchQuery}`);
 
     const params: any = { q: searchQuery, sortBy: "popularity", apiKey: NEWS_API_KEY, pageSize: 100 };
-
+    
     if (filters?.date) params["from"] = filters.date;
 
+    const headers = {
+      "User-Agent": "Mozilla/5.0",
+      "Accept": "application/json",
+    };
+
     const [newsApiRes, guardianRes, nytRes] = await Promise.all([
-      axios.get(NEWS_API_URL, { params }),
-      axios.get(GUARDIAN_API_URL, { params: { q: searchQuery, "api-key": GUARDIAN_API_KEY } }),
-      axios.get(NYTIMES_API_URL, { params: { q: searchQuery, "api-key": NYTIMES_API_KEY } }),
+      axios.get(NEWS_API_URL, { params, headers }), 
+      axios.get(GUARDIAN_API_URL, { params: { q: query, "api-key": GUARDIAN_API_KEY }, headers }),
+      axios.get(NYTIMES_API_URL, { params: { q: query, "api-key": NYTIMES_API_KEY }, headers }),
     ]);
 
     let categoriesSet = new Set<string>();

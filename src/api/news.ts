@@ -34,11 +34,10 @@ export const fetchNews = async (
         params,
         headers: { "Accept": "application/json" },
       }),
-      axios.get(
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(
-          GUARDIAN_API_URL + `?q=${searchQuery}&api-key=${GUARDIAN_API_KEY}`
-        )}`
-      ),
+      axios.get(GUARDIAN_API_URL, {
+        params: { q: searchQuery, "api-key": GUARDIAN_API_KEY },
+        headers: { "Accept": "application/json" },
+      }),
       axios.get(NYTIMES_API_URL, {
         params: { q: searchQuery, "api-key": NYTIMES_API_KEY },
         headers: { "Accept": "application/json" },

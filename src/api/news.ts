@@ -1,12 +1,9 @@
 import axios from "axios";
 
-// const NEWS_API_URL = "https://newsapi.org/v2/everything";
-// const GUARDIAN_API_URL = "https://content.guardianapis.com/search";
-// const NYTIMES_API_URL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-
-const NEWS_API_URL = "/api/news"; // Proxy path
-const GUARDIAN_API_URL = "/api/guardian";
-const NYTIMES_API_URL = "/api/nyt";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+const NEWS_API_URL = `${BASE_URL}/api/news`;
+const GUARDIAN_API_URL = `${BASE_URL}/api/guardian`;
+const NYTIMES_API_URL = `${BASE_URL}/api/nyt`;
 
 const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const GUARDIAN_API_KEY = import.meta.env.VITE_GUARDIAN_API_KEY;

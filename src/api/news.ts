@@ -32,7 +32,6 @@ export const fetchNews = async (
     if (filters?.date) params["from"] = filters.date;
 
     const headers = {
-      "User-Agent": "Mozilla/5.0",
       "Accept": "application/json",
     };
 

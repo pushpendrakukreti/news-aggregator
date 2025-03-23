@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const NEWS_API_URL = "/api/news";
-const GUARDIAN_API_URL = "/api/guardian";
-const NYTIMES_API_URL = "/api/nyt";
+const isProduction = import.meta.env.MODE === "production";
+
+const NEWS_API_URL = isProduction ? "https://newsapi.org/v2/everything" : "/api/news";
+const GUARDIAN_API_URL = isProduction ? "https://content.guardianapis.com/search" : "/api/guardian";
+const NYTIMES_API_URL = isProduction ? "https://api.nytimes.com/svc/search/v2/articlesearch.json" : "/api/nyt";
 
 const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const GUARDIAN_API_KEY = import.meta.env.VITE_GUARDIAN_API_KEY;

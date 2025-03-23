@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  server: {
+  server: mode === "development" ? {
     proxy: {
       "/api/news": {
         target: "https://newsapi.org",
@@ -24,5 +24,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/nyt/, "/svc/search/v2/articlesearch.json"),
       },
     },
-  },
-});
+  } : {},
+}));

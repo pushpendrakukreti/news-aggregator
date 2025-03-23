@@ -8,17 +8,20 @@ export default defineConfig({
       "/api/news": {
         target: "https://newsapi.org",
         changeOrigin: true,
-        secure: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/news/, "/v2/everything"),
       },
       "/api/guardian": {
         target: "https://content.guardianapis.com",
         changeOrigin: true,
-        secure: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/guardian/, "/search"),
       },
       "/api/nyt": {
         target: "https://api.nytimes.com",
         changeOrigin: true,
-        secure: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/nyt/, "/svc/search/v2/articlesearch.json"),
       },
     },
   },

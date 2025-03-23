@@ -2,11 +2,11 @@ import axios from "axios";
 
 const isProduction = import.meta.env.MODE === "production";
 
-const NEWS_API_URL = isProduction ? "https://newsapi.org/v2/everything" : "/api/news";
+// const NEWS_API_URL = isProduction ? "https://newsapi.org/v2/everything" : "/api/news";
 const GUARDIAN_API_URL = isProduction ? "https://content.guardianapis.com/search" : "/api/guardian";
 const NYTIMES_API_URL = isProduction ? "https://api.nytimes.com/svc/search/v2/articlesearch.json" : "/api/nyt";
 
-const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+// const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const GUARDIAN_API_KEY = import.meta.env.VITE_GUARDIAN_API_KEY;
 const NYTIMES_API_KEY = import.meta.env.VITE_NYTIMES_API_KEY;
 
@@ -27,16 +27,16 @@ export const fetchNews = async (
     const searchQuery = query.trim() !== "" ? query : "breaking news";
     console.log(`Fetching news for query: ${searchQuery}`);
 
-    const params: any = { q: searchQuery, sortBy: "popularity", apiKey: NEWS_API_KEY, pageSize: 100 };
+    // const params: any = { q: searchQuery, sortBy: "popularity", apiKey: NEWS_API_KEY, pageSize: 100 };
     
-    if (filters?.date) params["from"] = filters.date;
+    // if (filters?.date) params["from"] = filters.date;
 
     const headers = {
       "Accept": "application/json",
     };
 
-    const [newsApiRes, guardianRes, nytRes] = await Promise.all([
-      axios.get(NEWS_API_URL, { params, headers }), 
+    const [guardianRes, nytRes] = await Promise.all([
+      // axios.get(NEWS_API_URL, { params, headers }), 
       axios.get(GUARDIAN_API_URL, { params: { q: query, "api-key": GUARDIAN_API_KEY }, headers }),
       axios.get(NYTIMES_API_URL, { params: { q: query, "api-key": NYTIMES_API_KEY }, headers }),
     ]);
@@ -44,18 +44,18 @@ export const fetchNews = async (
     let categoriesSet = new Set<string>();
 
     let articles: Article[] = [
-      ...newsApiRes.data.articles.map((article: any) => {
-        const category = extractCategoryFromTitle(article.title);
-        if (category) categoriesSet.add(category);
-        return {
-          title: article.title,
-          url: article.url,
-          image: article.urlToImage || "",
-          publishedAt: article.publishedAt,
-          source: "NewsAPI",
-          category,
-        };
-      }),
+      // ...newsApiRes.data.articles.map((article: any) => {
+      //   const category = extractCategoryFromTitle(article.title);
+      //   if (category) categoriesSet.add(category);
+      //   return {
+      //     title: article.title,
+      //     url: article.url,
+      //     image: article.urlToImage || "",
+      //     publishedAt: article.publishedAt,
+      //     source: "NewsAPI",
+      //     category,
+      //   };
+      // }),
       ...guardianRes.data.response.results.map((article: any) => {
         const category = article.pillarName || "General";
         categoriesSet.add(category);
@@ -102,19 +102,19 @@ export const fetchNews = async (
   }
 };
 
-const extractCategoryFromTitle = (title: string): string | null => {
-  const keywords = {
-    technology: ["tech", "AI", "software", "computer"],
-    business: ["market", "stock", "finance", "economy"],
-    health: ["COVID", "medicine", "healthcare", "doctor"],
-    sports: ["football", "cricket", "tennis", "NBA"],
-  };
+// const extractCategoryFromTitle = (title: string): string | null => {
+//   const keywords = {
+//     technology: ["tech", "AI", "software", "computer"],
+//     business: ["market", "stock", "finance", "economy"],
+//     health: ["COVID", "medicine", "healthcare", "doctor"],
+//     sports: ["football", "cricket", "tennis", "NBA"],
+//   };
 
-  for (const [category, words] of Object.entries(keywords)) {
-    if (words.some((word) => title.toLowerCase().includes(word))) {
-      return category.charAt(0).toUpperCase() + category.slice(1);
-    }
-  }
+//   for (const [category, words] of Object.entries(keywords)) {
+//     if (words.some((word) => title.toLowerCase().includes(word))) {
+//       return category.charAt(0).toUpperCase() + category.slice(1);
+//     }
+//   }
 
-  return "General";
-};
+//   return "General";
+// };

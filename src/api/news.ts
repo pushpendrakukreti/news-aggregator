@@ -2,8 +2,7 @@ import axios from "axios";
 
 const isProduction = import.meta.env.MODE === "production";
 
-// const NEWS_API_URL = isProduction ? "https://newsapi.org/v2/everything" : "/api/news";
-const NEWS_API_URL = isProduction ? "https://news-aggregator-pk.vercel.app/api/proxy/v2/everything" : "/api/news";
+const NEWS_API_URL = isProduction ? "https://newsapi.org/v2/everything" : "/api/news";
 const GUARDIAN_API_URL = isProduction ? "https://content.guardianapis.com/search" : "/api/guardian";
 const NYTIMES_API_URL = isProduction ? "https://api.nytimes.com/svc/search/v2/articlesearch.json" : "/api/nyt";
 

@@ -1,0 +1,113 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+@media (min-width: $tablet) {
+
+    .header,
+    .search-container,
+    .filters-container {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        z-index: 1000;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .header {
+        margin-top: 0 !important;
+        background: rgba(30, 58, 138, 0.9);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .search-container {
+        top: 7%;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .filters-container {
+        top: 14%;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-list {
+        margin-top: 13%;
+    }
+}
+
+@media (max-width: $tablet) {
+    h1 {
+        font-size: 0.9em !important;
+        margin: 2.5%;
+        width: 90%;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+
+        img {
+            width: 25vw !important;
+            height: 25vh !important;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 10px !important;
+        }
+
+        p {
+            font-size: 8px !important;
+            margin-top: 20vh !important;
+            margin-bottom: 0px !important;
+        }
+    }
+
+    .search-container {
+        flex-direction: column;
+
+        input {
+            width: 94%;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .filters-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+
+        input {
+            width: 95%;
+        }
+
+        select {
+            width: 99.5%;
+        }
+
+        .reset-btn,
+        button {
+            padding: 2.5% 0px;
+            width: 100%;
+        }
+    }
+}

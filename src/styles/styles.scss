@@ -1,0 +1,23 @@
+@use "variables";
+@use "mixins";
+@use "global";
+@use "header";
+@use "search";
+@use "filters";
+@use "newsList";
+@use "preferences";
+@use "responsive";
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.no-records {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    margin-top: 20px;
+}

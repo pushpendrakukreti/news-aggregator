@@ -1,0 +1,54 @@
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+
+.filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0.5% 0% !important;
+    gap: 1.5rem !important;
+
+    select,
+    input {
+        padding: 8px;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+    }
+
+    select:hover,
+    input:hover {
+        cursor: pointer;
+    }
+
+    .reset-btn {
+        background: #a80f0a;
+        color: white;
+        padding: 0.6% 0px;
+        width: 7%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: #c9302c;
+        }
+    }
+
+    button {
+        background: $secondary-color;
+        color: white;
+        padding: 0.6% 0px;
+        width: 7%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        @include transition;
+
+        &:hover {
+            background: color.scale($primary-color, $lightness: -10%);
+        }
+    }
+}

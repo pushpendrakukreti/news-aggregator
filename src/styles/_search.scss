@@ -1,0 +1,33 @@
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+
+.search-container {
+  @include flex-center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 0.5% 0% !important;
+
+  input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    font-size: large;
+  }
+
+  button {
+    background: $secondary-color;
+    font-size: large;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    @include transition;
+
+    &:hover {
+      background: color.scale($primary-color, $lightness: -10%);
+    }
+  }
+}

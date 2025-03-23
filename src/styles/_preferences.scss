@@ -1,0 +1,35 @@
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+
+.preferences-container {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  @include box-shadow;
+  margin-bottom: 20px;
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    input {
+      margin-right: 10px;
+    }
+  }
+
+  button {
+    background: $primary-color;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    @include transition;
+
+    &:hover {
+      background: color.scale($primary-color, $lightness: -10%);
+    }
+  }
+}

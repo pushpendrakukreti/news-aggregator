@@ -1,0 +1,12 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.header {
+    background: $primary-color;
+    border-radius: 0.2rem;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
